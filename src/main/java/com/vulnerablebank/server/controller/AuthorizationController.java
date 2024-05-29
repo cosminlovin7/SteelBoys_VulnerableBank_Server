@@ -15,12 +15,6 @@ public class AuthorizationController {
     private static final int AJAX_CODE_UNAUTHORIZED = 401;
     private static final int AJAX_CODE_OK = 200;
 
-    @GetMapping("/home")
-    public String getHome() {
-        System.out.println("getHome called!");
-        return "Hello world!";
-    }
-
     @PostMapping("/login")
     public ResponseEntity<ResponseEntity4LoginRequest> handleLoginRequest(
         @RequestBody LoginRequestCmd loginRequestCmd
@@ -56,7 +50,7 @@ public class AuthorizationController {
         boolean allowLogin = false;
         int code = AJAX_CODE_UNAUTHORIZED;
         String message = "Incorrect username or password.";
-        if (loginRequestCmd.getPassword().contentEquals("admin")) {
+        if (loginRequestCmd.getPassword().contentEquals(DEFAULT_PASSWORD)) {
             allowLogin = true;
             code = AJAX_CODE_OK;
             message = "Authorization successful!";
